@@ -13,7 +13,7 @@ services:
     plan: free
     region: singapore
     branch: main
-    healthCheckPath: /api/health
+    # 移除 healthCheckPath，讓 Render 使用預設的 TCP 檢查
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
