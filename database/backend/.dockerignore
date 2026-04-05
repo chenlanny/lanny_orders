@@ -33,6 +33,10 @@ TestResults/
 *.mdf
 *.ldf
 
+# 前端文件（不包含在後端 Docker 映像中）
+frontend/
+node_modules/
+
 # 系統檔案
 .DS_Store
 Thumbs.db
