@@ -22,9 +22,6 @@ RUN dotnet publish -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS runtime
 WORKDIR /app
 
-# 安裝 PostgreSQL 客戶端工具（用於除錯）
-RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
-
 # 從建置階段複製編譯結果
 COPY --from=build /app/publish .
 
@@ -34,9 +31,6 @@ ENV ASPNETCORE_URLS=http://+:5000
 
 # 暴露端口（Render.com 會自動映射）
 EXPOSE 5000
-
-# 建立日誌目錄
-RUN mkdir -p /app/Logs && chmod 777 /app/Logs
 
 # 啟動應用程式
 ENTRYPOINT ["dotnet", "OfficeOrderApi.dll"]
