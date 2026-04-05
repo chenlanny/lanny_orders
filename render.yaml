@@ -1,0 +1,41 @@
+# ================================
+# Render.com 部署配置文件
+# ================================
+
+services:
+  # 後端 API 服務
+  - type: web
+    name: order-system-api
+    env: docker
+    dockerfilePath: ./database/backend/Dockerfile
+    dockerContext: ./database/backend
+    plan: free
+    region: singapore
+    branch: main
+    healthCheckPath: /api/health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://+:5000
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: order-system-db
+          property: connectionString
+      - key: Jwt__Key
+        generateValue: true
+        sync: false
+      - key: Jwt__Issuer
+        value: OfficeOrderAPI
+      - key: Jwt__Audience
+        value: OfficeOrderClient
+      - key: Jwt__ExpiryMinutes
+        value: 60
+
+# PostgreSQL 資料庫
+databases:
+  - name: order-system-db
+    databaseName: order_system
+    user: order_user
+    plan: free
+    region: singapore
