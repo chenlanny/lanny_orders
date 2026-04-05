@@ -22,9 +22,7 @@ services:
         fromDatabase:
           name: order-system-db
           property: connectionString
-      - key: Jwt__Key
-        generateValue: true
-        sync: false
+      # Jwt__Key 需要手動設定（請參考 RENDER_ENV_SETUP.md）
       - key: Jwt__Issuer
         value: OfficeOrderAPI
       - key: Jwt__Audience
