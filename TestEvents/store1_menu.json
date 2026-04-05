@@ -1,0 +1,78 @@
+﻿{
+    "success":  true,
+    "message":  "查詢成功",
+    "data":  {
+                 "createdAt":  "2026-04-03T14:25:38.017",
+                 "menuItems":  [
+                                   {
+                                       "menuItemId":  4,
+                                       "itemName":  "??憟嗉",
+                                       "category":  "憟嗉蝟餃?",
+                                       "priceRules":  "{\"銝剜\":50,\"憭扳\":55,\"?嗉?\":60}",
+                                       "options":  "{\"sweetness\":[\"甇?虜\",\"撠?\",\"??\",\"敺桃?\",\"?∠?\"],\"temperature\":[\"甇?虜??,\"撠\",\"敺桀\",\"?餃\",\"皞?,\"??],\"toppings\":[{\"name\":\"??\",\"price\":0},{\"name\":\"璊唳?\",\"price\":10},{\"name\":\"撣?\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:26:05.817"
+                                   },
+                                   {
+                                       "menuItemId":  5,
+                                       "itemName":  "??蝬",
+                                       "category":  "?園?",
+                                       "priceRules":  "{\"銝剜\":35,\"憭扳\":40,\"?嗉?\":45}",
+                                       "options":  "{\"sweetness\":[\"甇?虜\",\"撠?\",\"??\",\"敺桃?\",\"?∠?\"],\"temperature\":[\"甇?虜??,\"撠\",\"敺桀\",\"?餃\",\"皞?,\"??],\"toppings\":[{\"name\":\"??\",\"price\":10},{\"name\":\"璊唳?\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:26:05.817"
+                                   },
+                                   {
+                                       "menuItemId":  6,
+                                       "itemName":  "?迤?亥",
+                                       "category":  "?園?",
+                                       "priceRules":  "{\"銝剜\":30,\"憭扳\":35,\"?嗉?\":40}",
+                                       "options":  "{\"sweetness\":[\"甇?虜\",\"撠?\",\"??\",\"敺桃?\",\"?∠?\"],\"temperature\":[\"甇?虜??,\"撠\",\"敺桀\",\"?餃\",\"皞?,\"??],\"toppings\":[{\"name\":\"??\",\"price\":10},{\"name\":\"璊唳?\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:26:05.817"
+                                   },
+                                   {
+                                       "menuItemId":  7,
+                                       "itemName":  "瘜ａ憟嗉",
+                                       "category":  "憟嗉蝟餃?",
+                                       "priceRules":  "{\"銝剜\":55,\"憭扳\":60,\"?嗉?\":65}",
+                                       "options":  "{\"sweetness\":[\"甇?虜\",\"撠?\",\"??\",\"敺桃?\",\"?∠?\"],\"temperature\":[\"甇?虜??,\"撠\",\"敺桀\",\"?餃\",\"皞?,\"??],\"toppings\":[{\"name\":\"瘜ａ\",\"price\":0},{\"name\":\"璊唳?\",\"price\":10},{\"name\":\"撣?\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:26:05.817"
+                                   },
+                                   {
+                                       "menuItemId":  8,
+                                       "itemName":  "瑼豢狀蝬",
+                                       "category":  "?蝟餃?",
+                                       "priceRules":  "{\"銝剜\":40,\"憭扳\":45,\"?嗉?\":50}",
+                                       "options":  "{\"sweetness\":[\"甇?虜\",\"撠?\",\"??\",\"敺桃?\",\"?∠?\"],\"temperature\":[\"甇?虜??,\"撠\",\"敺桀\",\"?餃\"],\"toppings\":[{\"name\":\"??\",\"price\":10},{\"name\":\"璊唳?\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:26:05.82"
+                                   },
+                                   {
+                                       "menuItemId":  9,
+                                       "itemName":  "?祉?瑼豢狀",
+                                       "category":  "?蝟餃?",
+                                       "priceRules":  "{\"銝剜\":45,\"憭扳\":50,\"?嗉?\":55}",
+                                       "options":  "{\"sweetness\":[\"甇?虜\",\"撠?\",\"??\",\"敺桃?\",\"?∠?\"],\"temperature\":[\"甇?虜??,\"撠\",\"敺桀\",\"?餃\"],\"toppings\":[{\"name\":\"??\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:26:05.82"
+                                   },
+                                   {
+                                       "menuItemId":  10,
+                                       "itemName":  "憟嗉?蝬",
+                                       "category":  "憟嗉?蝟餃?",
+                                       "priceRules":  "{\"銝剜\":60,\"憭扳\":65}",
+                                       "options":  "{\"sweetness\":[\"甇?虜\",\"撠?\",\"??\",\"敺桃?\",\"?∠?\"],\"temperature\":[\"甇?虜??,\"撠\"],\"toppings\":[]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:26:05.82"
+                                   }
+                               ],
+                 "storeId":  1,
+                 "storeName":  "50嵐",
+                 "category":  "Drink",
+                 "phone":  "02-1234-5678",
+                 "address":  "台北市信義區"
+             },
+    "error":  null
+}

@@ -1,0 +1,96 @@
+﻿{
+    "success":  true,
+    "message":  "查詢成功",
+    "data":  {
+                 "createdAt":  "2026-04-03T14:25:39.9",
+                 "menuItems":  [
+                                   {
+                                       "menuItemId":  46,
+                                       "itemName":  "招牌排骨便當",
+                                       "category":  "經典便當",
+                                       "priceRules":  "{\"標準\":80}",
+                                       "options":  "{\"portions\":[\"標準\"],\"extras\":[{\"name\":\"加飯\",\"price\":0},{\"name\":\"加滷蛋\",\"price\":10},{\"name\":\"加青菜\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.44"
+                                   },
+                                   {
+                                       "menuItemId":  47,
+                                       "itemName":  "雞腿便當",
+                                       "category":  "經典便當",
+                                       "priceRules":  "{\"標準\":85}",
+                                       "options":  "{\"portions\":[\"標準\"],\"extras\":[{\"name\":\"加飯\",\"price\":0},{\"name\":\"加滷蛋\",\"price\":10},{\"name\":\"加青菜\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.44"
+                                   },
+                                   {
+                                       "menuItemId":  48,
+                                       "itemName":  "炸雞便當",
+                                       "category":  "經典便當",
+                                       "priceRules":  "{\"標準\":80}",
+                                       "options":  "{\"portions\":[\"標準\"],\"extras\":[{\"name\":\"加飯\",\"price\":0},{\"name\":\"加滷蛋\",\"price\":10},{\"name\":\"加青菜\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.44"
+                                   },
+                                   {
+                                       "menuItemId":  49,
+                                       "itemName":  "爌肉便當",
+                                       "category":  "經典便當",
+                                       "priceRules":  "{\"標準\":85}",
+                                       "options":  "{\"portions\":[\"標準\"],\"extras\":[{\"name\":\"加飯\",\"price\":0},{\"name\":\"加滷蛋\",\"price\":10},{\"name\":\"加青菜\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.443"
+                                   },
+                                   {
+                                       "menuItemId":  50,
+                                       "itemName":  "焢肉便當",
+                                       "category":  "經典便當",
+                                       "priceRules":  "{\"標準\":75}",
+                                       "options":  "{\"portions\":[\"標準\"],\"extras\":[{\"name\":\"加飯\",\"price\":0},{\"name\":\"加滷蛋\",\"price\":10},{\"name\":\"加青菜\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.443"
+                                   },
+                                   {
+                                       "menuItemId":  51,
+                                       "itemName":  "鱈魚便當",
+                                       "category":  "海鮮便當",
+                                       "priceRules":  "{\"標準\":90}",
+                                       "options":  "{\"portions\":[\"標準\"],\"extras\":[{\"name\":\"加飯\",\"price\":0},{\"name\":\"加滷蛋\",\"price\":10},{\"name\":\"加青菜\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.443"
+                                   },
+                                   {
+                                       "menuItemId":  52,
+                                       "itemName":  "素食便當",
+                                       "category":  "素食系列",
+                                       "priceRules":  "{\"標準\":70}",
+                                       "options":  "{\"portions\":[\"標準\"],\"extras\":[{\"name\":\"加飯\",\"price\":0}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.443"
+                                   },
+                                   {
+                                       "menuItemId":  53,
+                                       "itemName":  "豬排便當",
+                                       "category":  "經典便當",
+                                       "priceRules":  "{\"標準\":85}",
+                                       "options":  "{\"portions\":[\"標準\"],\"extras\":[{\"name\":\"加飯\",\"price\":0},{\"name\":\"加滷蛋\",\"price\":10},{\"name\":\"加青菜\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.443"
+                                   },
+                                   {
+                                       "menuItemId":  54,
+                                       "itemName":  "雙主菜便當",
+                                       "category":  "特色便當",
+                                       "priceRules":  "{\"標準\":110}",
+                                       "options":  "{\"portions\":[\"標準\"],\"combos\":[\"排骨+雞腿\",\"排骨+炸雞\",\"雞腿+炸雞\"],\"extras\":[{\"name\":\"加飯\",\"price\":0},{\"name\":\"加滷蛋\",\"price\":10},{\"name\":\"加青菜\",\"price\":10}]}",
+                                       "isAvailable":  true,
+                                       "createdAt":  "2026-04-03T16:55:48.443"
+                                   }
+                               ],
+                 "storeId":  4,
+                 "storeName":  "悟饕便當",
+                 "category":  "Lunch",
+                 "phone":  "02-4567-8901",
+                 "address":  "台北市松山區"
+             },
+    "error":  null
+}

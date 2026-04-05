@@ -1,0 +1,97 @@
+﻿{
+    "success":  true,
+    "message":  "查詢成功",
+    "data":  [
+                 {
+                     "menuItemId":  55,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":45,\"??\":50,\"??\":60}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\",\"?\",\"?\"],\"toppings\":[{\"name\":\"??\",\"price\":0},{\"name\":\"??\",\"price\":5}]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:23:45.27"
+                 },
+                 {
+                     "menuItemId":  56,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":40,\"??\":45,\"??\":55}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\",\"?\",\"?\"],\"toppings\":[{\"name\":\"??\",\"price\":10},{\"name\":\"??\",\"price\":5}]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:12.76"
+                 },
+                 {
+                     "menuItemId":  57,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":55,\"??\":65}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\",\"?\",\"?\"],\"toppings\":[{\"name\":\"??\",\"price\":10}]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:13.027"
+                 },
+                 {
+                     "menuItemId":  58,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":40,\"??\":45,\"??\":55}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\",\"?\",\"?\"],\"toppings\":[{\"name\":\"??\",\"price\":10}]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:13.3"
+                 },
+                 {
+                     "menuItemId":  59,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":50,\"??\":60}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\",\"?\",\"?\"],\"toppings\":[{\"name\":\"??\",\"price\":10}]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:13.57"
+                 },
+                 {
+                     "menuItemId":  60,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":50,\"??\":60}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\",\"?\",\"?\"]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:13.853"
+                 },
+                 {
+                     "menuItemId":  61,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":45,\"??\":55}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\"]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:14.087"
+                 },
+                 {
+                     "menuItemId":  62,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":30,\"??\":35,\"??\":40}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\",\"?\",\"?\"]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:14.257"
+                 },
+                 {
+                     "menuItemId":  63,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":25,\"??\":30,\"??\":35}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\",\"??\",\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\",\"?\",\"?\"]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:14.43"
+                 },
+                 {
+                     "menuItemId":  64,
+                     "itemName":  "????",
+                     "category":  "????",
+                     "priceRules":  "{\"??\":50,\"??\":60}",
+                     "options":  "{\"sweetness\":[\"??\",\"??\"],\"temperature\":[\"???\",\"??\",\"??\",\"??\"]}",
+                     "isAvailable":  true,
+                     "createdAt":  "2026-04-03T10:24:14.62"
+                 }
+             ],
+    "error":  null
+}

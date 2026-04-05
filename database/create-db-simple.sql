@@ -1,0 +1,14 @@
+USE master;
+GO
+
+IF EXISTS (SELECT name FROM sys.databases WHERE name = N'L_DBII')
+BEGIN
+    DROP DATABASE L_DBII;
+END
+GO
+
+CREATE DATABASE L_DBII;
+GO
+
+USE L_DBII;
+GO

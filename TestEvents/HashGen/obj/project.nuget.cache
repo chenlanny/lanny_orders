@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cs7tEP5XOHc+3+0grnbR1bCsv6KQXPLswRfT8E8a6rdXDv3tz1wudVYs83jxO++P1ES5jIl4kKpZyfYXgV/4tQ==",
+  "success": true,
+  "projectFilePath": "D:\\github\\ORDERS\\A_order\\TestEvents\\HashGen\\HashGen.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lanny\\.nuget\\packages\\bcrypt.net-next\\4.1.0\\bcrypt.net-next.4.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}

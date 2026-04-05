@@ -1,0 +1,15 @@
+D:\github\ORDERS\A_order\TestEvents\HashGen\obj\Debug\netcoreapp3.1\HashGen.csprojAssemblyReference.cache
+D:\github\ORDERS\A_order\TestEvents\HashGen\obj\Debug\netcoreapp3.1\HashGen.AssemblyInfoInputs.cache
+D:\github\ORDERS\A_order\TestEvents\HashGen\obj\Debug\netcoreapp3.1\HashGen.AssemblyInfo.cs
+D:\github\ORDERS\A_order\TestEvents\HashGen\obj\Debug\netcoreapp3.1\HashGen.csproj.CoreCompileInputs.cache
+D:\github\ORDERS\A_order\TestEvents\HashGen\bin\Debug\netcoreapp3.1\HashGen.exe
+D:\github\ORDERS\A_order\TestEvents\HashGen\bin\Debug\netcoreapp3.1\HashGen.deps.json
+D:\github\ORDERS\A_order\TestEvents\HashGen\bin\Debug\netcoreapp3.1\HashGen.runtimeconfig.json
+D:\github\ORDERS\A_order\TestEvents\HashGen\bin\Debug\netcoreapp3.1\HashGen.runtimeconfig.dev.json
+D:\github\ORDERS\A_order\TestEvents\HashGen\bin\Debug\netcoreapp3.1\HashGen.dll
+D:\github\ORDERS\A_order\TestEvents\HashGen\bin\Debug\netcoreapp3.1\HashGen.pdb
+D:\github\ORDERS\A_order\TestEvents\HashGen\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
+D:\github\ORDERS\A_order\TestEvents\HashGen\obj\Debug\netcoreapp3.1\HashGen.csproj.CopyComplete
+D:\github\ORDERS\A_order\TestEvents\HashGen\obj\Debug\netcoreapp3.1\HashGen.dll
+D:\github\ORDERS\A_order\TestEvents\HashGen\obj\Debug\netcoreapp3.1\HashGen.pdb
+D:\github\ORDERS\A_order\TestEvents\HashGen\obj\Debug\netcoreapp3.1\HashGen.genruntimeconfig.cache

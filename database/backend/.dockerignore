@@ -1,0 +1,47 @@
+# Docker 忽略檔案清單
+
+# 建置輸出
+bin/
+obj/
+out/
+publish/
+
+# 日誌檔案
+Logs/
+*.log
+
+# 本機設定檔
+appsettings.Development.json
+appsettings.Local.json
+
+# IDE 設定
+.vscode/
+.vs/
+.idea/
+
+# 使用者機密
+secrets.json
+
+# NuGet 套件
+*.nupkg
+
+# 測試結果
+TestResults/
+*.trx
+
+# 資料庫檔案
+*.mdf
+*.ldf
+
+# 系統檔案
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# 文件
+README.md
+*.md
