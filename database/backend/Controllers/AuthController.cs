@@ -47,7 +47,8 @@ namespace OfficeOrderApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "登入失敗");
-                return StatusCode(500, ApiResponse<LoginResponseDto>.Fail("伺服器錯誤", ex.Message));
+                var inner = ex.InnerException?.InnerException?.Message ?? ex.InnerException?.Message ?? ex.Message;
+                return StatusCode(500, ApiResponse<LoginResponseDto>.Fail("伺服器錯誤", $"{ex.Message} | INNER: {inner}"));
             }
         }
 
