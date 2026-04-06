@@ -84,7 +84,7 @@ const Settings = () => {
             安全性設定
           </span>
         } 
-        bordered={false}
+        variant="borderless"
       >
         <div style={{ marginBottom: '16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -102,7 +102,8 @@ const Settings = () => {
         </div>
       </Card>
 
-      {/* 通知設定 */}
+      {/* 通知設定 - 暫時隱藏 */}
+      {false && (
       <Card 
         title={
           <span>
@@ -111,7 +112,7 @@ const Settings = () => {
           </span>
         } 
         style={{ marginTop: '24px' }}
-        bordered={false}
+        variant="borderless"
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div>
@@ -150,12 +151,14 @@ const Settings = () => {
           />
         </div>
       </Card>
+      )}
 
-      {/* 介面設定 */}
+      {/* 介面設定 - 暫時隱藏 */}
+      {false && (
       <Card 
         title="介面設定" 
         style={{ marginTop: '24px' }}
-        bordered={false}
+        variant="borderless"
       >
         <Form
           form={form}
@@ -166,6 +169,8 @@ const Settings = () => {
           }}
           onFinish={handleSettingsSave}
         >
+          {/* 語言設定 - 隱藏 */}
+          {false && (
           <Form.Item
             label="語言"
             name="language"
@@ -176,6 +181,7 @@ const Settings = () => {
               <Option value="en-US">English</Option>
             </Select>
           </Form.Item>
+          )}
 
           <Form.Item
             label="每頁顯示筆數"
@@ -196,6 +202,7 @@ const Settings = () => {
           </Form.Item>
         </Form>
       </Card>
+      )}
 
       {/* 密碼變更 Modal */}
       <Modal

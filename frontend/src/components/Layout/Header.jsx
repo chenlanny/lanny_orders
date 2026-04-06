@@ -1,23 +1,18 @@
 import React from 'react';
-import { Layout as AntLayout, Menu, Avatar, Dropdown, Button } from 'antd';
+import { Layout as AntLayout, Menu, Avatar, Dropdown } from 'antd';
 import { 
   UserOutlined, 
   LogoutOutlined, 
-  SettingOutlined,
-  ShoppingCartOutlined 
+  LockOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
-import { useCartStore } from '../../store/cartStore';
 
 const { Header: AntHeader } = AntLayout;
 
 const Header = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
-  const { items } = useCartStore();
-  
-  const cartItemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   const userMenuItems = [
     {
@@ -28,8 +23,8 @@ const Header = () => {
     },
     {
       key: 'settings',
-      icon: <SettingOutlined />,
-      label: '設定',
+      icon: <LockOutlined />,
+      label: '密碼變更',
       onClick: () => navigate('/settings'),
     },
     {
@@ -49,50 +44,64 @@ const Header = () => {
   return (
     <AntHeader 
       style={{ 
-        background: '#fff', 
+        background: 'linear-gradient(135deg, #FFB75E 0%, #ED8F03 50%, #FF6B6B 100%)', 
         padding: '0 24px', 
         display: 'flex', 
         justifyContent: 'space-between',
         alignItems: 'center',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+        boxShadow: '0 4px 12px rgba(255, 107, 107, 0.3)',
+        height: '64px'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <h2 style={{ margin: 0, cursor: 'pointer' }} onClick={() => navigate('/dashboard')}>
-          🥤 智慧訂購系統
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ 
+          fontSize: '33px',
+          filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+        }}>
+          🥤🍔🍕
+        </div>
+        <h2 
+          style={{ 
+            margin: 0, 
+            cursor: 'pointer',
+            fontSize: '25px',
+            fontWeight: 'bold',
+            color: '#fff',
+            textShadow: '0 2px 4px rgba(0,0,0,0.2)'
+          }} 
+          onClick={() => navigate('/dashboard')}
+        >
+          餐飲訂購系統
         </h2>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <Button 
-          type="text" 
-          icon={<ShoppingCartOutlined />}
-          onClick={() => navigate('/cart')}
-          style={{ position: 'relative' }}
-        >
-          購物車
-          {cartItemCount > 0 && (
-            <span style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              background: '#ff4d4f',
-              color: 'white',
-              borderRadius: '10px',
-              padding: '0 6px',
-              fontSize: '12px',
-              minWidth: '20px',
-              textAlign: 'center'
-            }}>
-              {cartItemCount}
-            </span>
-          )}
-        </Button>
-
         <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-          <div style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Avatar icon={<UserOutlined />} />
-            <span>{user?.name || '使用者'}</span>
+          <div style={{ 
+            cursor: 'pointer', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '8px',
+            padding: '8px 16px',
+            background: 'rgba(255, 255, 255, 0.2)',
+            borderRadius: '20px',
+            backdropFilter: 'blur(10px)',
+            transition: 'all 0.3s ease'
+          }}>
+            <Avatar 
+              icon={<UserOutlined />} 
+              style={{ 
+                background: '#fff',
+                color: '#FF8C42'
+              }}
+            />
+            <span style={{ 
+              color: '#fff',
+              fontWeight: '500',
+              textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+            }}>
+              {user?.name || '使用者'}
+            </span>
           </div>
         </Dropdown>
       </div>

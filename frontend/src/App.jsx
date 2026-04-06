@@ -15,6 +15,7 @@ import Settings from './pages/Settings';
 import StoreManagement from './pages/StoreManagement';
 import MenuManagement from './pages/MenuManagement';
 import EventManagement from './pages/EventManagement';
+import UserManagement from './pages/UserManagement';
 
 // 受保護的路由組件
 const ProtectedRoute = ({ children }) => {
@@ -67,6 +68,7 @@ function App() {
         <Route path="admin/stores" element={<AdminRoute><StoreManagement /></AdminRoute>} />
         <Route path="admin/menu" element={<AdminRoute><MenuManagement /></AdminRoute>} />
         <Route path="admin/events" element={<AdminRoute><EventManagement /></AdminRoute>} />
+        <Route path="admin/users" element={<AdminRoute><UserManagement /></AdminRoute>} />
       </Route>
 
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

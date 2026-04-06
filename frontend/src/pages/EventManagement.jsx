@@ -54,7 +54,7 @@ const EventManagement = () => {
 
     try {
       await api.put(`/events/groups/${selectedGroup.groupId}/deadline`, {
-        deadline: newDeadline.toISOString()
+        deadline: newDeadline.format('YYYY-MM-DDTHH:mm:ss')  // 使用本地時間格式
       });
       message.success('截止時間更新成功');
       setModalVisible(false);
@@ -97,8 +97,11 @@ const EventManagement = () => {
         title: '狀態',
         dataIndex: 'status',
         key: 'status',
-        render: (status) => {
-          const isOpen = status === 'Open';
+        render: (status, record) => {
+          // 檢查截止時間是否已過
+          const now = dayjs();
+          const isPastDeadline = dayjs(record.deadline).isBefore(now);
+          const isOpen = status === 'Open' && !isPastDeadline;
           return (
             <Tag color={isOpen ? 'green' : 'red'} icon={isOpen ? <CheckCircleOutlined /> : <ClockCircleOutlined />}>
               {isOpen ? '可點餐' : '已截止'}
@@ -110,7 +113,11 @@ const EventManagement = () => {
         title: '操作',
         key: 'action',
         render: (_, group) => {
-          const isOpen = group.status === 'Open';
+          // 檢查截止時間是否已過
+          const now = dayjs();
+          const isPastDeadline = dayjs(group.deadline).isBefore(now);
+          const isOpen = group.status === 'Open' && !isPastDeadline;
+          
           return isOpen ? (
             <Button 
               type="link"
@@ -156,11 +163,19 @@ const EventManagement = () => {
       title: '狀態',
       dataIndex: 'status',
       key: 'status',
-      render: (status) => (
-        <Tag color={status === 'Open' ? 'green' : 'orange'}>
-          {status === 'Open' ? '進行中' : '已結單'}
-        </Tag>
-      ),
+      render: (status, record) => {
+        // 檢查是否所有店家都截止了
+        const now = dayjs();
+        const allExpired = record.orderGroups && record.orderGroups.length > 0 &&
+          record.orderGroups.every(group => dayjs(group.deadline).isBefore(now));
+        
+        const isOpen = status === 'Open' && !allExpired;
+        return (
+          <Tag color={isOpen ? 'green' : 'orange'}>
+            {isOpen ? '進行中' : '已截止'}
+          </Tag>
+        );
+      },
     },
     {
       title: '店家數',

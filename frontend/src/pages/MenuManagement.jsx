@@ -341,10 +341,9 @@ const MenuManagement = () => {
                         rules={[{ required: true, message: '請輸入價格' }]}
                       >
                         <InputNumber
-                          placeholder="價格"
+                          placeholder="價格（元）"
                           min={0}
                           style={{ width: '100%' }}
-                          addonAfter="元"
                         />
                       </Form.Item>
                     </Col>
@@ -421,10 +420,9 @@ const MenuManagement = () => {
                         rules={[{ required: true, message: '請輸入加價金額' }]}
                       >
                         <InputNumber
-                          placeholder="加價金額"
+                          placeholder="加價金額（元）"
                           min={0}
                           style={{ width: '100%' }}
-                          addonAfter="元"
                         />
                       </Form.Item>
                     </Col>

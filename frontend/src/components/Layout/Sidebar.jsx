@@ -7,7 +7,8 @@ import {
   BarChartOutlined,
   ShopOutlined,
   SettingOutlined,
-  UnorderedListOutlined
+  UnorderedListOutlined,
+  TeamOutlined
 } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
@@ -64,6 +65,11 @@ const Sidebar = () => {
             icon: <ShoppingOutlined />,
             label: '揪團管理',
           },
+          {
+            key: '/admin/users',
+            icon: <TeamOutlined />,
+            label: '帳號人員管理',
+          },
         ],
       },
     ] : []),
@@ -74,13 +80,57 @@ const Sidebar = () => {
   };
 
   return (
-    <Menu
-      mode="inline"
-      selectedKeys={[location.pathname]}
-      style={{ height: '100%', borderRight: 0 }}
-      items={menuItems}
-      onClick={handleMenuClick}
-    />
+    <div style={{
+      height: '100%',
+      background: 'linear-gradient(180deg, #FFF5E6 0%, #FFE8CC 100%)',
+      borderRight: '1px solid #FFD4A3'
+    }}>
+      <Menu
+        mode="inline"
+        selectedKeys={[location.pathname]}
+        style={{ 
+          height: '100%', 
+          borderRight: 0,
+          background: 'transparent',
+          fontSize: '16px'
+        }}
+        items={menuItems}
+        onClick={handleMenuClick}
+        theme="light"
+      />
+      <style>
+        {`
+          .ant-menu-item-selected {
+            background: linear-gradient(135deg, #FFB75E 0%, #FF8C42 100%) !important;
+            color: #fff !important;
+            font-weight: bold;
+          }
+          .ant-menu-item-selected .anticon {
+            color: #fff !important;
+          }
+          .ant-menu-item:hover {
+            background: rgba(255, 183, 94, 0.2) !important;
+            color: #FF6B6B;
+          }
+          .ant-menu-submenu-selected > .ant-menu-submenu-title {
+            color: #FF6B6B !important;
+            font-weight: bold;
+          }
+          .ant-menu-item {
+            margin: 4px 8px !important;
+            border-radius: 8px !important;
+            transition: all 0.3s ease;
+          }
+          .ant-menu-submenu {
+            margin: 4px 8px !important;
+          }
+          .ant-menu-submenu-title {
+            border-radius: 8px !important;
+            margin: 0 !important;
+          }
+        `}
+      </style>
+    </div>
   );
 };
 

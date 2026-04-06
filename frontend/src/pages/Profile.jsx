@@ -40,7 +40,7 @@ const Profile = () => {
 
   return (
     <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-      <Card title="個人資料" bordered={false}>
+      <Card title="個人資料" variant="borderless">
         {/* 頭像區域 */}
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
           <Avatar size={100} icon={<UserOutlined />} style={{ marginBottom: '16px' }} />
@@ -120,7 +120,7 @@ const Profile = () => {
       </Card>
 
       {/* 帳號資訊 */}
-      <Card title="帳號資訊" style={{ marginTop: '24px' }} bordered={false}>
+      <Card title="帳號資訊" style={{ marginTop: '24px' }} variant="borderless">
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
           <span style={{ color: '#666' }}>角色:</span>
           <span>{user?.role === 'Admin' ? '管理員' : '一般使用者'}</span>

@@ -42,7 +42,7 @@ const CreateEvent = () => {
         notes: values.notes || '',
         orderGroups: values.orderGroups.map(group => ({
           storeId: group.storeId,
-          deadline: group.deadline.toISOString(),
+          deadline: group.deadline.format('YYYY-MM-DDTHH:mm:ss'),  // 使用本地時間
           deliveryFee: group.deliveryFee || 0,
         })),
       };
@@ -143,30 +143,70 @@ const CreateEvent = () => {
                       {...restField}
                       label="截止時間"
                       name={[name, 'deadline']}
-                      rules={[{ required: true, message: '請選擇截止時間' }]}
+                      extra="截止時間必須在當前時間 30 分鐘之後"
+                      rules={[
+                        { required: true, message: '請選擇截止時間' },
+                        {
+                          validator: (_, value) => {
+                            if (!value) {
+                              return Promise.resolve();
+                            }
+                            const minDeadline = dayjs().add(30, 'minute');
+                            if (value.isBefore(minDeadline)) {
+                              return Promise.reject(new Error('截止時間必須在 30 分鐘之後'));
+                            }
+                            return Promise.resolve();
+                          },
+                        },
+                      ]}
                     >
                       <DatePicker 
                         showTime 
                         format="YYYY-MM-DD HH:mm"
-                        placeholder="選擇截止時間"
+                        placeholder="選擇截止時間（至少 30 分鐘後）"
                         style={{ width: '100%' }}
                         size="large"
                         disabledDate={(current) => current && current < dayjs().startOf('day')}
+                        disabledTime={(current) => {
+                          if (!current || !current.isSame(dayjs(), 'day')) {
+                            return {};
+                          }
+                          const now = dayjs();
+                          const minTime = now.add(30, 'minute');
+                          return {
+                            disabledHours: () => {
+                              const hours = [];
+                              for (let i = 0; i < minTime.hour(); i++) {
+                                hours.push(i);
+                              }
+                              return hours;
+                            },
+                            disabledMinutes: (selectedHour) => {
+                              if (selectedHour !== minTime.hour()) {
+                                return [];
+                              }
+                              const minutes = [];
+                              for (let i = 0; i < minTime.minute(); i++) {
+                                minutes.push(i);
+                              }
+                              return minutes;
+                            },
+                          };
+                        }}
                       />
                     </Form.Item>
 
                     <Form.Item
                       {...restField}
-                      label="外送費"
+                      label="外送費（元）"
                       name={[name, 'deliveryFee']}
                       tooltip="設定為 0 表示無外送費"
                     >
                       <InputNumber
                         min={0}
-                        placeholder="外送費"
+                        placeholder="請輸入金額"
                         style={{ width: '100%' }}
                         size="large"
-                        addonAfter="元"
                       />
                     </Form.Item>
                   </Card>

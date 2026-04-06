@@ -17,18 +17,19 @@ import {
   ShopOutlined,
   CheckCircleOutlined 
 } from '@ant-design/icons';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 import { eventService } from '../services/eventService';
 import { storeService } from '../services/storeService';
 import { orderService } from '../services/orderService';
 import { useCartStore } from '../store/cartStore';
 import MenuItemCard from '../components/Menu/MenuItemCard';
 import ShoppingCart from '../components/Order/ShoppingCart';
-import dayjs from 'dayjs';
 
 const EventDetail = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [menuData, setMenuData] = useState({});
@@ -49,9 +50,24 @@ const EventDetail = () => {
       if (result.success && result.data) {
         setEvent(result.data);
         if (result.data.orderGroups && result.data.orderGroups.length > 0) {
-          setActiveTab(result.data.orderGroups[0].groupId.toString());
-          // 載入第一個店家的菜單
-          loadStoreMenu(result.data.orderGroups[0].storeId, result.data.orderGroups[0].groupId);
+          // 檢查 URL 參數中是否指定了店家
+          const groupIdFromUrl = searchParams.get('group');
+          const targetGroup = groupIdFromUrl 
+            ? result.data.orderGroups.find(g => g.groupId.toString() === groupIdFromUrl)
+            : null;
+          
+          // 如果 URL 中指定的店家存在，使用它；否則使用第一個未截止的店家
+          let initialGroup = targetGroup;
+          if (!initialGroup) {
+            // 找第一個未截止的店家
+            const now = dayjs();
+            initialGroup = result.data.orderGroups.find(
+              g => dayjs(g.deadline).isAfter(now)
+            ) || result.data.orderGroups[0]; // 如果都截止了，還是用第一個
+          }
+          setActiveTab(initialGroup.groupId.toString());
+          // 載入指定店家的菜單
+          loadStoreMenu(initialGroup.storeId, initialGroup.groupId);
         }
       }
     } catch (error) {
@@ -176,9 +192,18 @@ const EventDetail = () => {
           <div>
             <h1 style={{ marginBottom: 8 }}>{event.title}</h1>
             <Space>
-              <Tag color={event.status === 'Open' ? 'green' : 'orange'}>
-                {event.status === 'Open' ? '進行中' : '已結單'}
-              </Tag>
+              {(() => {
+                // 檢查是否所有店家都截止了
+                const now = dayjs();
+                const allExpired = event.orderGroups && event.orderGroups.length > 0 &&
+                  event.orderGroups.every(group => dayjs(group.deadline).isBefore(now));
+                const isOpen = event.status === 'Open' && !allExpired;
+                return (
+                  <Tag color={isOpen ? 'green' : 'orange'}>
+                    {isOpen ? '進行中' : '已截止'}
+                  </Tag>
+                );
+              })()}
               <span style={{ color: '#999' }}>
                 <ClockCircleOutlined /> 發起於 {dayjs(event.createdAt).format('YYYY-MM-DD HH:mm')}
               </span>
@@ -226,9 +251,16 @@ const EventDetail = () => {
                       {group.deliveryFee ? `$${group.deliveryFee}` : '免運'}
                     </Descriptions.Item>
                     <Descriptions.Item label="狀態">
-                      <Tag color={group.status === 'Open' ? 'green' : 'orange'}>
-                        {group.status === 'Open' ? '可點餐' : '已截止'}
-                      </Tag>
+                      {(() => {
+                        const now = dayjs();
+                        const isPastDeadline = dayjs(group.deadline).isBefore(now);
+                        const isOpen = group.status === 'Open' && !isPastDeadline;
+                        return (
+                          <Tag color={isOpen ? 'green' : 'orange'}>
+                            {isOpen ? '可點餐' : '已截止'}
+                          </Tag>
+                        );
+                      })()}
                     </Descriptions.Item>
                   </Descriptions>
 
@@ -242,14 +274,21 @@ const EventDetail = () => {
                       gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
                       gap: '16px',
                     }}>
-                      {menuData[group.groupId].map((item) => (
-                        <MenuItemCard 
-                          key={item.menuItemId} 
-                          item={item}
-                          groupId={group.groupId}
-                          disabled={group.status !== 'Open'}
-                        />
-                      ))}
+                      {menuData[group.groupId].map((item) => {
+                        // 檢查是否已截止
+                        const now = dayjs();
+                        const isPastDeadline = dayjs(group.deadline).isBefore(now);
+                        const isDisabled = group.status !== 'Open' || isPastDeadline;
+                        
+                        return (
+                          <MenuItemCard 
+                            key={item.menuItemId} 
+                            item={item}
+                            groupId={group.groupId}
+                            disabled={isDisabled}
+                          />
+                        );
+                      })}
                     </div>
                   ) : (
                     <Empty description="該店家尚無菜單品項" />

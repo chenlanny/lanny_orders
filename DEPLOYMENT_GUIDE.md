@@ -114,7 +114,7 @@ dotnet restore
    ```
    postgresql://postgres:[YOUR-PASSWORD]@db.xxxxxxxxxxxxx.supabase.co:5432/postgres
    ```
-6. 📋 **儲存此連接字串**（稍後會用到）
+6. 📋 **儲存此連接字串**（稍後會用到）     postgresql://postgres:[ReyifmEReyi]@db.idyfbtswixhfahddnlkw.supabase.co:5432/postgres
 
 ---
 
@@ -188,6 +188,9 @@ Render.com 會自動讀取 `render.yaml` 檔案，但需要手動設定環境變
 ```
 https://order-system-api.onrender.com/api/auth/login
 ```
+
+#### 真的測後端API網址
+''''''https://order-system-api-2tve.onrender.com  
 
 **預期結果**：顯示 HTTP 405 或 400 錯誤（正常，因為需要 POST 請求）
 

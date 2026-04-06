@@ -19,7 +19,14 @@ const Dashboard = () => {
       setLoading(true);
       const result = await eventService.getEvents('Open');
       if (result.success) {
-        setEvents(result.data || []);
+        // 過濾：只顯示還有未截止店家的揪團
+        const now = dayjs();
+        const filteredEvents = (result.data || []).filter(event => {
+          // 檢查是否還有未截止的店家
+          if (!event.orderGroups || event.orderGroups.length === 0) return false;
+          return event.orderGroups.some(group => dayjs(group.deadline).isAfter(now));
+        });
+        setEvents(filteredEvents);
       }
     } catch (error) {
       console.error('載入揪團失敗:', error);
@@ -29,7 +36,12 @@ const Dashboard = () => {
     }
   };
 
-  const getStatusTag = (status) => {
+  const getStatusTag = (status, event) => {
+    // 如果所有店家都截止了，顯示「已截止」
+    if (status === 'Open' && event && !hasAvailableStore(event)) {
+      return <Tag color="orange">已截止</Tag>;
+    }
+    
     const statusMap = {
       'Open': { color: 'green', text: '進行中' },
       'Closed': { color: 'orange', text: '已結單' },
@@ -45,20 +57,6 @@ const Dashboard = () => {
     if (!event.orderGroups || event.orderGroups.length === 0) return false;
     const now = dayjs();
     return event.orderGroups.some(group => dayjs(group.deadline).isAfter(now));
-  };
-
-  // 取得最近的截止時間
-  const getEarliestDeadline = (event) => {
-    if (!event.orderGroups || event.orderGroups.length === 0) return null;
-    const deadlines = event.orderGroups.map(g => dayjs(g.deadline));
-    // 找出最早的截止時間
-    let earliest = deadlines[0];
-    for (let i = 1; i < deadlines.length; i++) {
-      if (deadlines[i].isBefore(earliest)) {
-        earliest = deadlines[i];
-      }
-    }
-    return earliest;
   };
 
   return (
@@ -100,7 +98,7 @@ const Dashboard = () => {
                 <Space direction="vertical" style={{ width: '100%' }} size="middle">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h3 style={{ margin: 0 }}>{event.title}</h3>
-                    {getStatusTag(event.status)}
+                    {getStatusTag(event.status, event)}
                   </div>
 
                   <div>
@@ -110,38 +108,52 @@ const Dashboard = () => {
                     
                     {event.orderGroups && event.orderGroups.length > 0 && (
                       <>
-                        <div style={{ color: '#666', marginBottom: 4 }}>
-                          <ShopOutlined /> 店家 ({event.orderGroups.length}):
+                        <div style={{ color: '#666', marginBottom: 8 }}>
+                          <ShopOutlined /> 店家資訊：
                         </div>
-                        {event.orderGroups.map((group, index) => {
-                          const isExpired = dayjs(group.deadline).isBefore(dayjs());
-                          return (
-                            <Tag 
-                              key={index} 
-                              color={isExpired ? 'default' : 'blue'} 
-                              style={{ marginBottom: 4 }}
-                            >
-                              {group.storeName || `店家 ${group.storeId}`}
-                              {isExpired && ' (已截止)'}
-                            </Tag>
-                          );
-                        })}
-                        
-                        {/* 顯示最近的截止時間 */}
-                        {(() => {
-                          const earliestDeadline = getEarliestDeadline(event);
-                          const isAllExpired = !hasAvailableStore(event);
-                          return (
-                            <div style={{ 
-                              color: isAllExpired ? '#ff4d4f' : '#1890ff',
-                              fontSize: 12, 
-                              marginTop: 8 
-                            }}>
-                              <ClockCircleOutlined /> 截止時間: {earliestDeadline?.format('MM/DD HH:mm')}
-                              {isAllExpired && ' (已截止)'}
-                            </div>
-                          );
-                        })()}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                          {event.orderGroups.map((group, index) => {
+                            const isExpired = dayjs(group.deadline).isBefore(dayjs());
+                            const deadlineStr = dayjs(group.deadline).format('MM/DD HH:mm');
+                            return (
+                              <div 
+                                key={index}
+                                style={{ 
+                                  display: 'flex', 
+                                  alignItems: 'center', 
+                                  justifyContent: 'space-between',
+                                  padding: '4px 8px',
+                                  background: isExpired ? '#f5f5f5' : '#e6f7ff',
+                                  borderRadius: '4px',
+                                  border: `1px solid ${isExpired ? '#d9d9d9' : '#91d5ff'}`,
+                                  cursor: 'pointer'
+                                }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  navigate(`/events/${event.eventId}?group=${group.groupId}`);
+                                }}
+                              >
+                                <span style={{ 
+                                  fontWeight: 500,
+                                  color: isExpired ? '#999' : '#1890ff'
+                                }}>
+                                  {group.storeName || `店家 ${group.storeId}`}
+                                </span>
+                                <span style={{ 
+                                  fontSize: 12,
+                                  color: isExpired ? '#ff4d4f' : '#52c41a',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: 4
+                                }}>
+                                  <ClockCircleOutlined />
+                                  {deadlineStr}
+                                  {isExpired && <Tag color="error" style={{ margin: 0, fontSize: 11 }}>已截止</Tag>}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </>
                     )}
                   </div>
@@ -161,7 +173,16 @@ const Dashboard = () => {
                   {hasAvailableStore(event) ? (
                     <Button type="primary" block onClick={(e) => {
                       e.stopPropagation();
-                      navigate(`/events/${event.eventId}`);
+                      // 找到第一個未截止的店家
+                      const now = dayjs();
+                      const firstAvailableGroup = event.orderGroups.find(
+                        group => dayjs(group.deadline).isAfter(now)
+                      );
+                      if (firstAvailableGroup) {
+                        navigate(`/events/${event.eventId}?group=${firstAvailableGroup.groupId}`);
+                      } else {
+                        navigate(`/events/${event.eventId}`);
+                      }
                     }}>
                       進入點餐
                     </Button>
