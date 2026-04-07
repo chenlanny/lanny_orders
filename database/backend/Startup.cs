@@ -26,40 +26,20 @@ namespace OfficeOrderApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // 添加 DbContext - 智能切換資料庫提供者
+            // 添加 DbContext - 使用 Supabase PostgreSQL
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            
-            // 根據連接字符串判斷資料庫類型
-            bool isPostgreSQL = connectionString.Contains("Host=") || connectionString.Contains("host=");
             
             services.AddDbContext<AppDbContext>(options =>
             {
-                if (isPostgreSQL)
-                {
-                    // PostgreSQL 配置（用於 Render.com 等雲端平台）
-                    options.UseNpgsql(
-                        connectionString,
-                        npgsqlOptions => npgsqlOptions.EnableRetryOnFailure(
-                            maxRetryCount: 3,
-                            maxRetryDelay: TimeSpan.FromSeconds(5),
-                            errorCodesToAdd: null
-                        )
-                    );
-                    Log.Information("使用 PostgreSQL 資料庫");
-                }
-                else
-                {
-                    // SQL Server 配置（本地開發環境）
-                    options.UseSqlServer(
-                        connectionString,
-                        sqlOptions => sqlOptions.EnableRetryOnFailure(
-                            maxRetryCount: 3,
-                            maxRetryDelay: TimeSpan.FromSeconds(5),
-                            errorNumbersToAdd: null
-                        )
-                    );
-                    Log.Information("使用 SQL Server 資料庫");
-                }
+                options.UseNpgsql(
+                    connectionString,
+                    npgsqlOptions => npgsqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(5),
+                        errorCodesToAdd: null
+                    )
+                );
+                Log.Information("使用 Supabase PostgreSQL 資料庫");
             });
 
             // 添加 JWT 驗證

@@ -1,0 +1,29 @@
+# ================================
+# Render.com 部署配置文件
+# 使用外部 Supabase 資料庫
+# ================================
+
+services:
+  # 後端 API 服務
+  - type: web
+    name: order-system-api
+    env: docker
+    dockerfilePath: ./database/backend/Dockerfile
+    dockerContext: ./database/backend
+    plan: free
+    region: singapore
+    branch: main
+    # 移除 healthCheckPath，讓 Render 使用預設的 TCP 檢查
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://+:5000
+      # ConnectionStrings__DefaultConnection 和 Jwt__Key 需要手動設定
+      # 請參考 RENDER_ENV_SETUP.md
+      - key: Jwt__Issuer
+        value: OfficeOrderAPI
+      - key: Jwt__Audience
+        value: OfficeOrderClient
+      - key: Jwt__ExpiryMinutes
+        value: 60

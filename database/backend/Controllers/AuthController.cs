@@ -135,11 +135,9 @@ namespace OfficeOrderApi.Controllers
         {
             try
             {
-                var diagnostics = new
-                {
-                    timestamp = DateTime.UtcNow,
-                    hostname = System.Net.Dns.GetHostName(),
-                };
+                object diagnostics;
+                var timestamp = DateTime.UtcNow;
+                var hostname = System.Net.Dns.GetHostName();
 
                 // 嘗試 DNS 解析
                 try
@@ -147,8 +145,8 @@ namespace OfficeOrderApi.Controllers
                     var host = await System.Net.Dns.GetHostEntryAsync("aws-0-ap-southeast-1.pooler.supabase.com");
                     diagnostics = new
                     {
-                        diagnostics.timestamp,
-                        diagnostics.hostname,
+                        timestamp,
+                        hostname,
                         dnsResolved = true,
                         ipAddresses = host.AddressList.Length
                     };
@@ -157,8 +155,8 @@ namespace OfficeOrderApi.Controllers
                 {
                     diagnostics = new
                     {
-                        diagnostics.timestamp,
-                        diagnostics.hostname,
+                        timestamp,
+                        hostname,
                         dnsResolved = false,
                         dnsError = dnsEx.Message
                     };
