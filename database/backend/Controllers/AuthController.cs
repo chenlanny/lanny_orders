@@ -117,5 +117,50 @@ namespace OfficeOrderApi.Controllers
                 return StatusCode(500, ApiResponse<object>.Fail("伺服器錯誤", ex.Message));
             }
         }
+
+        /// <summary>
+        /// 診斷端點 - 檢查網絡連接
+        /// </summary>
+        [HttpGet("diag")]
+        public async Task<ActionResult<object>> Diagnosis()
+        {
+            try
+            {
+                var diagnostics = new
+                {
+                    timestamp = DateTime.UtcNow,
+                    hostname = System.Net.Dns.GetHostName(),
+                };
+
+                // 嘗試 DNS 解析
+                try
+                {
+                    var host = await System.Net.Dns.GetHostEntryAsync("aws-0-ap-southeast-1.pooler.supabase.com");
+                    diagnostics = new
+                    {
+                        diagnostics.timestamp,
+                        diagnostics.hostname,
+                        dnsResolved = true,
+                        ipAddresses = host.AddressList.Length
+                    };
+                }
+                catch (Exception dnsEx)
+                {
+                    diagnostics = new
+                    {
+                        diagnostics.timestamp,
+                        diagnostics.hostname,
+                        dnsResolved = false,
+                        dnsError = dnsEx.Message
+                    };
+                }
+
+                return Ok(new { success = true, data = diagnostics });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { success = false, error = ex.Message });
+            }
+        }
     }
 }
