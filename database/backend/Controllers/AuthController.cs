@@ -39,25 +39,35 @@ namespace OfficeOrderApi.Controllers
         {
             try
             {
+                _logger.LogInformation("🔐 登入請求已到達 AuthController");
+
                 if (!ModelState.IsValid)
                 {
+                    _logger.LogWarning("⚠️ 請求資料驗證失敗");
                     return BadRequest(ApiResponse<LoginResponseDto>.Fail("請求資料格式不正確"));
                 }
+
+                _logger.LogInformation("✓ 模型驗證通過，開始調用 AuthService.LoginAsync");
 
                 var result = await _authService.LoginAsync(request);
 
                 if (result == null)
                 {
+                    _logger.LogWarning("❌ LoginAsync 返回 null");
                     return Unauthorized(ApiResponse<LoginResponseDto>.Fail("電子郵件或密碼錯誤"));
                 }
 
+                _logger.LogInformation("✓ 登入成功，返回 Token");
                 return Ok(ApiResponse<LoginResponseDto>.Ok(result, "登入成功"));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "登入失敗");
-                var inner = ex.InnerException?.InnerException?.Message ?? ex.InnerException?.Message ?? ex.Message;
-                return StatusCode(500, ApiResponse<LoginResponseDto>.Fail("伺服器錯誤", $"{ex.Message} | INNER: {inner}"));
+                _logger.LogError(ex, "❌ 登入失敗 - 異常類型：{ExceptionType}, 來源：{Source}", 
+                    ex.GetType().FullName, ex.Source);
+                _logger.LogError("異常堆棧：{StackTrace}", ex.StackTrace);
+                
+                var innerMessage = ex.InnerException?.InnerException?.Message ?? ex.InnerException?.Message ?? ex.Message;
+                return StatusCode(500, ApiResponse<LoginResponseDto>.Fail("伺服器錯誤", innerMessage));
             }
         }
 

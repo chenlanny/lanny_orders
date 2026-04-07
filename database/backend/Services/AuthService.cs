@@ -41,6 +41,7 @@ namespace OfficeOrderApi.Services
                 _logger.LogInformation("用戶嘗試登入：{Email}", request.Email);
 
                 // 查詢用戶
+                _logger.LogInformation("開始查詢資料庫用戶：{Email}", request.Email);
                 var user = await _context.Users
                     .FirstOrDefaultAsync(u => u.Email == request.Email);
 
@@ -50,12 +51,16 @@ namespace OfficeOrderApi.Services
                     return null;
                 }
 
+                _logger.LogInformation("找到用戶，驗證密碼：{Email}", request.Email);
+
                 // 驗證密碼
                 if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
                 {
                     _logger.LogWarning("登入失敗：密碼錯誤 {Email}", request.Email);
                     return null;
                 }
+
+                _logger.LogInformation("密碼驗證成功，檢查帳號狀態：{Email}", request.Email);
 
                 // 檢查帳號是否已停用
                 if (!user.IsActive)
@@ -65,6 +70,7 @@ namespace OfficeOrderApi.Services
                 }
 
                 // 生成 JWT Token
+                _logger.LogInformation("開始生成 JWT Token：{Email}", request.Email);
                 var token = GenerateJwtToken(user);
 
                 _logger.LogInformation("用戶登入成功：{Email}", request.Email);
@@ -77,7 +83,13 @@ namespace OfficeOrderApi.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "登入過程發生錯誤：{Email}", request.Email);
+                _logger.LogError(ex, "❌ 登入過程發生異常：{Email}, 異常類型：{ExceptionType}, 訊息：{Message}", 
+                    request.Email, ex.GetType().Name, ex.Message);
+                if (ex.InnerException != null)
+                {
+                    _logger.LogError("內層異常：{InnerExceptionType} - {InnerMessage}", 
+                        ex.InnerException.GetType().Name, ex.InnerException.Message);
+                }
                 throw;
             }
         }
