@@ -7,19 +7,21 @@
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /app
 
-# 設置構建環境變數以增加超時時間
+# 設置構建環境變數
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 ENV NUGET_CERT_REVOCATION_MODE=offline
 
-# 複製專案檔案並還原套件（帶重試機制）
+# 複製專案檔案
 COPY OfficeOrderApi.csproj ./
+
+# 還原套件（單線程以提高成功率）
 RUN dotnet restore --disable-parallel
 
 # 複製所有原始碼
 COPY . ./
 
-# 建置應用程式（Release 模式）
-RUN dotnet publish -c Release -o /app/publish --no-restore
+# 直接發佈（包括還原，確保所有依賴項可用）
+RUN dotnet publish -c Release -o /app/publish
 
 # ================================
 # 階段 2: 運行階段
