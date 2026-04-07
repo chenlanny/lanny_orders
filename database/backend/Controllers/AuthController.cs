@@ -23,6 +23,15 @@ namespace OfficeOrderApi.Controllers
         }
 
         /// <summary>
+        /// API 狀態檢查
+        /// </summary>
+        [HttpGet("status")]
+        public IActionResult Status()
+        {
+            return Ok(new { status = "online", timestamp = DateTime.UtcNow });
+        }
+
+        /// <summary>
         /// 用戶登入
         /// </summary>
         [HttpPost("login")]
